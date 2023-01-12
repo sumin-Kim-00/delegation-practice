@@ -1,7 +1,7 @@
 
 
 
-const data = [
+const data = [    // 배열이기때문에 data[0], 여기서부턴 객체니까 .으로 접근 data[0].alt
   {
     "id": 1,
     "src": "visual1.jpg",
@@ -28,6 +28,8 @@ const data = [
 
 const navigation = getNode('.navigation');
 // const list = getNodes('.navigation > li');
+const visualImage = getNode('.visual img');
+
 
 
 function makeArray(arrLike){
@@ -37,9 +39,12 @@ function makeArray(arrLike){
 
 function handler(e) {
     let target = e.target.closest('li');  // li에 is-active 추가해줘야 하므로 타켓과 가장 근접한 li 찾음
-    let list = makeArray(navigation.children); //자식 찾음
-
     if(!target) return; // 다른 곳을 누르면 함수 종료(이거 안넣으면 null값 나옴)
+
+    let list = makeArray(navigation.children); //자식 찾음
+    let index = attr(target, 'data-index');
+    
+
 
     // Array.from(list);   // forEach를 쓰기위해 array로 바꿔줌(for(let i)...이렇게 해도 되긴하는데 비효율적이니까)
     // let arr = [ ...list ]
@@ -49,9 +54,21 @@ function handler(e) {
 
     list.forEach(item=>removeClass(item, 'is-active'))  // 일단 is-active 다 지우고
 
+    
+    // console.log(target.dataset.index);
+    // console.log(index);
+
+
+    // visualImage.src = `./assets/part01/visual${index}.jpg`;
+    // attr(visualImage, 'src', `./assets/part01/visual${index}.jpg`);  // setAttr
+    attr(visualImage, 'src', `./assets/part01/${data[index-1].src}`);  // setAttr
+    attr(visualImage, 'atr', data[index-1].alt);  // setAttr
+    
+    
+
     addClass(target, 'is-active');   // target만 다시 추가
 
-    // console.log(target);
+
 }
 
 navigation.addEventListener('click', handler);
