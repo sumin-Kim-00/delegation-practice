@@ -24,6 +24,31 @@ const data = [
 
 
 
+const swiper = new Swiper('.swiper', {  // 옵션 객체
+  autoplay: true,
+  loop: true,   // 맨 마지막 갔다가 다시 슈루룩 맨앞으로 오는게 싫어서 무한루프 걸음
+  speed: 2000,
+  parallax: true, // 시차, 신박한 기능!
+  pagination: {
+    el: '.pagination',
+    clickable: true,
+    bulletClass: 'bullet',  // 점들의 class 이름을 바꿔줌
+    bulletActiveClass: 'is-active',
+    // bullet들 커스텀
+    renderBullet: function(index, className){
+      // 템플릿 리터럴(``)로 리턴
+      return /* html */ `
+        <span class="${className}">
+          <img src="./assets/part01/${data[index].src}" alt="${data[index]}.alt"/>
+        </span>
+      `
+    }
+  }
+
+})
+
+
+
 
 
 
