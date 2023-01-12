@@ -1,4 +1,5 @@
 
+// jQuery 활용
 
 const data = [
   {
@@ -22,6 +23,50 @@ const data = [
     "alt": "물방을 모양의 독특한 디자인의 의자들을 나열한 공간"
   }
 ]
+
+
+
+// $('.navigation > li').click(function(e) {
+//   e.preventDefault();   // 이걸하면 태그의 기능을 상실(a태그는 href로 이동하지 않음)
+//   // jQury에선 달러 this
+//   let index = $(this).index();
+
+//   // console.log(index);
+
+//   $('.navigation > li').removeClass('is-active');
+
+//   $(this).addClass('is-active');
+
+//   $('.visual img').attr({
+//     'src': `./assets/part01/${data[index].src}`,
+//     'alt': data[index].alt
+//   })
+
+// })
+
+
+
+
+// 이벤트 위임
+$('.navigation').on('click', 'li', function(e){
+
+  e.preventDefault();
+  let index = $(this).attr('data-index');
+  
+  $('.navigation > li').removeClass('is-active');
+
+  $(this).addClass('is-active');
+
+  $('.visual img').attr({
+    'src': `./assets/part01/${data[index-1].src}`,
+    'alt': data[index-1].alt
+  })
+  
+})
+
+
+
+
 
 
 
